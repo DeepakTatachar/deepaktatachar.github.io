@@ -5,20 +5,20 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="jss/main.js"/></script>
         <link rel="stylesheet" href="css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div id="parallax">
-            <canvas id="aboutMeOpacity">
-            </canvas>
-            <div id="navigationBar">
-                <input type="button" value="Home" class="navButton"/>
-                <input type="button" value="Resume" class="navButton" />
-                <input type="button" value="Research" class="navButton" />
-                <input type="button" value="Art" class="navButton" />
-                <input type="button" value="Sports" class="navButton" />
-                <input type="button" value="Contact" class="navButton" />
-            </div>
+        <div id="navigationBar">
+                <a href="#navigationBar" id="homeButton" >Home</a>
+                <a href="#resume" id="resumeButton" >Resume</a>
+                <a href="#research" id="researchButton" >Research</a>
+                <a href="#art" id="artButton" >Art</a>
+                <a href="#sports" id="sportsButton" >Sports</a>
+                <a href="#contact" id="contactButton" >Contact</a>
+        </div>
+        <div id="home">
+            <!---<canvas id="aboutMeOpacity">
+            </canvas> -->
             <div id="name">
                 Deepak Ravikumar Tatachar
             </div>
@@ -27,12 +27,11 @@
                 I'm currently pursuing my PhD at Purdue University. Scroll down to see my full resume.
             </div>
         </div>
-        <div id="resume">
-        </div>
+
         <div id ="art">
                 Art, The creative side of me was forged through formal training for a smidgen under a decade in watercolors, oils and pencil sketching. Of the three main art skills, I enjoy pencil sketching the most and have been recently been dabbling in digital art. Here are few samples of my portfolio. <br> 
         </div>
-        <div id="sport">
+        <div id="sports">
             <div id="sportText">
                 Gifted with a naturally unatheletic frame and below average coordination, my passion for Motorsports is clearly justifiable. I'm a self confessed petrol head or gear head depending on which part of the world your from, with an unconditional liking for anything Motorsports or Formula 1. <br/>
 
@@ -43,8 +42,8 @@
                 Fastest 5k: 23:17 <br>
             </div>
         </div>
-        <div>
-                Contact: dravikum@purdue.edu
+        <div id="contact">
+            Contact: dravikum@purdue.edu
         </div>
     </body>
 </html>

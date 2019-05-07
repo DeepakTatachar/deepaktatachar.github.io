@@ -1,5 +1,16 @@
-$("button").click(function() {
-    $('html,body').animate({
-        scrollTop: $("resume").offset().top},
-        'slow');
+
+function initialize(node) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+
+$(document).ready(function () {
+    initialize();
 });
