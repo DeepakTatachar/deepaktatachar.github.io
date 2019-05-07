@@ -1,5 +1,5 @@
 /* Style for the navigation bar, make it a grid */
-.navigationBar {
+#navigationBar {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto; 
   margin: 0px 0;
@@ -8,8 +8,10 @@
 
 .navButton {
   border: none;
-  background-color:#555555; 
-  color: white;
+  opacity: 0.3;
+  filter: alpha(opacity=30)
+  background-color: Transparent; 
+  color: black;
   padding: 5px;
   text-align: center;
   text-decoration: none;
@@ -17,6 +19,64 @@
   margin: 0px 0px;
   cursor: pointer;
   z-index: 100;
-  font-size:16px;
+  font-size: 22px;
   font-family: 'Arial', sans-serif;
+  outline: none;
+}
+
+.navButton:hover {
+  opacity: 0.9;
+  background-color: Transparent; 
+}
+
+body, html {
+  background-color: #444444;
+  margin: 0;
+  color: white;
+  font-size: 22px;
+  font-family: 'Arial', sans-serif;
+}
+
+.paragraphText {
+    margin: 0;
+}
+
+#sport {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 0;
+}
+
+#sportText {
+  margin: 15px;
+  text-align: justify;
+}
+
+#parallax {
+  /* The image used */
+  background-image: url('https://spotlight.it-notes.ru/wp-content/uploads/2017/07/c936d6011901aea201040231f69459f3.jpg');
+
+  /* Full height */
+  height: 100%; 
+  width: 100%;
+
+   /* Set a specific height */
+  min-height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#name {
+  padding: 30px;
+  text-align: center;
+  font-size: 36px
+}
+
+#aboutMe {
+  text-align: center;
+  font-size: 22px
 }
