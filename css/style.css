@@ -93,7 +93,7 @@ body, html {
 }
 
 #education, #experience {
-  padding: 30px;
+  padding: 15px;
   font-size: 1.2vw;
   color: #444242;
 }
@@ -105,14 +105,14 @@ body, html {
 	border-right-width: 1.5px;
 	border-style: solid;
 	border-color: #003757;
-	margin-top: 50px;
+	margin-top: 30px;
 	width: 0.2vw;
 }
 
 .title {
   text-align: left;
   font-weight: bold;
-  font-size: 1.4vw;
+  font-size: 1.6vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -120,35 +120,35 @@ body, html {
 .boldContent {
   text-align: left;
   font-weight: bold;
-  font-size: 1.2vw;
+  font-size: 1.4vw;
   z-index: 200;
   margin-bottom: 0;
 }
 
 .content {
   text-align: left;
-  font-size: 1vw;
+  font-size: 1.3vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentSmall {
   text-align: left;
-  font-size: 0.95vw;
+  font-size: 1.4vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentLeft {
   text-align: left;
-  font-size: 1vw;
+  font-size: 1.4vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentRight {
   text-align: right;
-  font-size: 1vw;
+  font-size: 1.4vw;
   z-index: 200;
   margin-bottom: 0;
 }
