@@ -105,12 +105,30 @@ body, html {
 }
 
 #resume {
+  display: grid;
+  grid-template-columns: 28% 3px auto;
   padding: 30px;
   text-align: center;
   font-size: 40px;
   z-index: 200;
-  height: 100%;
-  background: transparent; 	 
+  background: rgba(255, 255, 255, 0.9); 	 
+}
+
+#education, #experience {
+  padding: 30px;
+  font-size: 15px;
+  color: #444242;
+}
+
+#verticalLine {
+	border-left: 0;
+	border-top: 0;
+	border-bottom: 0;
+	border-right-width: 1.5px;
+	border-style: solid;
+	border-color: #003757;
+	margin-top: 50px;
+	width: 3px;
 }
 
 #art {
@@ -127,3 +145,63 @@ body, html {
   z-index: 200;
   background: transparent; 
 }
+
+#contact, #art {
+  padding: 30px;
+  text-align: justify;
+  font-size: 22px;
+  z-index: 200;
+  background: transparent; 
+  height: 100%;	
+}
+
+.title {
+  text-align: left;
+  font-weight: bold;
+  font-size: 24px;
+  z-index: 200;
+  margin-bottom: 0;
+}
+
+.boldContent {
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  z-index: 200;
+  margin-bottom: 0;
+}
+
+.content {
+  text-align: left;
+  font-size: 18px;
+  z-index: 200;
+  margin-top: 5px;
+}
+
+.contentSmall {
+  text-align: left;
+  font-size: 14px;
+  z-index: 200;
+  margin-top: 5px;
+}
+
+.contentLeft {
+  text-align: left;
+  font-size: 17px;
+  z-index: 200;
+  margin-top: 5px;
+}
+
+.contentRight {
+  text-align: right;
+  font-size: 18px;
+  z-index: 200;
+  margin-bottom: 0;
+}
+
+#eachExp {
+ display: grid;
+ grid-template-columns: auto auto;
+ margin-bottom: 0;
+}
+
