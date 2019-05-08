@@ -1,4 +1,11 @@
-/* Style for the navigation bar, make it a grid */
+body, html {
+  background-color: #444444;
+  margin: 0;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+}
+
 #navigationBar {
   overflow: hidden;
   background-color: rgba(0,0,0,0.6);
@@ -15,7 +22,7 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.2vw;
   z-index: 300;
 }
 
@@ -24,15 +31,6 @@
   background-color: rgba(0,0,0,0.65);
   outline: none;
   z-index: 300;
-}
-
-body, html {
-  background-color: #444444;
-  margin: 0;
-  color: white;
-  font-size: 22px;
-  font-family: 'Arial', sans-serif;
-  height: 100%;
 }
 
 
@@ -47,33 +45,6 @@ body, html {
   left: 0;
   outline: none;
   z-index: 0;
-}
-
-#sports {
-  display: grid;
-  margin: 0;
-
-  /* The image used */
-  background-image: url('https://www.theweek.co.uk/sites/theweek/files/styles/16x9_710/public/2019/05/ayrton_senna_formula_1_gettyimages-659224375.jpg');
-
-  /* Full height */
-  height: 30%; 
-  width: 100%;
-
-   /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#sportText {
-  margin: 15px;
-  text-align: justify;
-  z-index: 100;
 }
 
 #home {
@@ -99,7 +70,14 @@ body, html {
 #name {
   padding-top: 100px;
   text-align: center;
-  font-size: 40px;
+  font-size: 2vw;
+  z-index: 200;
+  background: transparent; 
+}
+
+#aboutMe {
+  text-align: center;
+  font-size: 1.5vw;
   z-index: 200;
   background: transparent; 
 }
@@ -109,14 +87,14 @@ body, html {
   grid-template-columns: 28% 3px auto;
   padding: 30px;
   text-align: center;
-  font-size: 40px;
+  font-size: 1.2vw;
   z-index: 200;
   background: rgba(255, 255, 255, 0.9); 	 
 }
 
 #education, #experience {
   padding: 30px;
-  font-size: 15px;
+  font-size: 1.2vw;
   color: #444242;
 }
 
@@ -128,37 +106,13 @@ body, html {
 	border-style: solid;
 	border-color: #003757;
 	margin-top: 50px;
-	width: 3px;
-}
-
-#art {
-  padding: 30px;
-  text-align: justify;
-  font-size: 22px;
-  z-index: 100;
-  background: transparent; 
-}
-
-#aboutMe {
-  text-align: center;
-  font-size: 22px;
-  z-index: 200;
-  background: transparent; 
-}
-
-#contact, #art {
-  padding: 30px;
-  text-align: justify;
-  font-size: 22px;
-  z-index: 200;
-  background: transparent; 
-  height: 100%;	
+	width: 0.2vw;
 }
 
 .title {
   text-align: left;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.4vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -166,35 +120,35 @@ body, html {
 .boldContent {
   text-align: left;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.2vw;
   z-index: 200;
   margin-bottom: 0;
 }
 
 .content {
   text-align: left;
-  font-size: 18px;
+  font-size: 1vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentSmall {
   text-align: left;
-  font-size: 14px;
+  font-size: 0.95vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentLeft {
   text-align: left;
-  font-size: 17px;
+  font-size: 1vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentRight {
   text-align: right;
-  font-size: 18px;
+  font-size: 1vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -205,3 +159,41 @@ body, html {
  margin-bottom: 0;
 }
 
+
+#sports {
+  display: grid;
+  margin: 0;
+
+  /* The image used */
+  background-image: url('https://www.theweek.co.uk/sites/theweek/files/styles/16x9_710/public/2019/05/ayrton_senna_formula_1_gettyimages-659224375.jpg');
+
+  /* Full height */
+  height: 30%; 
+  width: 100%;
+
+   /* Set a specific height */
+  min-height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#sportText {
+  margin: 1.5vw;
+  text-align: justify;
+  z-index: 100;
+}
+
+
+
+#contact, #art {
+  padding: 30px;
+  text-align: justify;
+  font-size: 22px;
+  z-index: 200;
+  background: transparent; 
+  height: 100%;	
+}
