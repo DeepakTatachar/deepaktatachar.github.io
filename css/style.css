@@ -93,8 +93,8 @@ body, html {
 }
 
 #education, #experience {
-  padding: 15px;
-  font-size: 1.2vw;
+  padding: 30px;
+  font-size: 1vw;
   color: #444242;
 }
 
@@ -112,7 +112,7 @@ body, html {
 .title {
   text-align: left;
   font-weight: bold;
-  font-size: 1.6vw;
+  font-size: 1.5vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -120,35 +120,35 @@ body, html {
 .boldContent {
   text-align: left;
   font-weight: bold;
-  font-size: 1.4vw;
+  font-size: 1.3vw;
   z-index: 200;
   margin-bottom: 0;
 }
 
 .content {
   text-align: left;
-  font-size: 1.3vw;
+  font-size: 1.1vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentSmall {
   text-align: left;
-  font-size: 1.4vw;
+  font-size: 1.1vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentLeft {
   text-align: left;
-  font-size: 1.4vw;
+  font-size: 1.1vw;
   z-index: 200;
   margin-top: 5px;
 }
 
 .contentRight {
   text-align: right;
-  font-size: 1.4vw;
+  font-size: 1.1vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -164,7 +164,7 @@ body, html {
   filter: alpha;
   background-color: rgba(15,15,15,0.6);
   width: 100%;
-  height: 600px;
+  height: 650px;
   position: relative;
   top: 0;
   left: 0;
@@ -180,7 +180,7 @@ body, html {
   background-image: url('https://www.theweek.co.uk/sites/theweek/files/styles/16x9_710/public/2019/05/ayrton_senna_formula_1_gettyimages-659224375.jpg');
 
   /* Full height */
-  height: 600px; 
+  height: 650px; 
   width: 100%;
 
    /* Set a specific height */
@@ -206,13 +206,30 @@ body, html {
   z-index: 100;
 }
 
-
-
-#contact, #art {
+#contact{
   padding: 50px;
   text-align: justify;
   font-size: 22px;
   z-index: 200;
-  background: transparent; 
+  background-color: transparent;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px;
+}
+
+#art {
+  padding: 50px;
+  text-align: justify;
+  font-size: 22px;
+  z-index: 200;
+  background-color: #444444;
   height: 100%;	
+}
+
+.logo {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	z-index: 100;
+	mix-blend-mode: multiply;
 }
