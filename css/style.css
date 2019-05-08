@@ -245,8 +245,8 @@ body, html {
 }
 
 #profilePic {
-	height: 200px;
-	width: 200px;
+	height: 10vw;
+	width: 10vw;
 	border-radius: 50%;
 	z-index: 100;
 	margin-top: 0px;
