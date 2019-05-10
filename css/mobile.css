@@ -96,6 +96,62 @@ body, html {
   background: rgba(255, 255, 255, 0.9); 	 
 }
 
+#researchOpacity {
+  border: 0;
+  filter: alpha;
+  background-color: rgba(15,15,15,0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: 0;
+}
+
+
+#research {
+  /* The image used */
+  background-image: url('http://lablaunch.com/wp-content/uploads/2014/02/bigstock-A-pipette-dropping-sample-into-48191024.jpg');
+
+  /* Full height */
+  width: 100%;
+
+   /* Set a specific height */
+  min-height: 300px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: grid;
+  padding-top: 80px;
+}
+
+#researchText {
+  margin-top: 0px;
+  margin-left: 30px;
+  z-index: 200;
+}
+
+.authors {
+  margin-top: 5px;
+  margin-left: 6px;
+}
+
+.pubLink:link {
+  font-weight: bold;
+  color: white;
+}
+
+/* A link that has been visited */
+.pubLink:visited {
+  font-weight: bold;
+  color: white;
+}
+
 #education, #experience {
   padding: 0px;
   font-size: 1vw;
@@ -134,9 +190,18 @@ body, html {
   font-size: 3vw;
   z-index: 200;
   margin-top: 5px;
+  width: 100%;
 }
 
 .contentAwards {
+  text-align: justify;
+  font-size: 3vw;
+  z-index: 200;
+  margin-top: 5px;
+  padding-left: 15px;
+}
+
+.contentJustify {
   text-align: justify;
   font-size: 3vw;
   z-index: 200;
