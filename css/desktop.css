@@ -22,7 +22,7 @@ body, html {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   z-index: 300;
 }
 
@@ -70,7 +70,7 @@ body, html {
 #name {
   padding-top: 150px;
   text-align: center;
-  font-size: 5vw;
+  font-size: 4vw;
   font-weight: bold;
   z-index: 200;
   height: 100px;
@@ -80,7 +80,7 @@ body, html {
 #aboutMe {
   padding: 25px;
   text-align: center;
-  font-size: 1.8vw;
+  font-size: 1.6vw;
   z-index: 200;
   background: transparent; 
 }
@@ -90,7 +90,7 @@ body, html {
   grid-template-columns: 28% 3px auto;
   padding: 30px;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 1.0vw;
   z-index: 200;
   background: rgba(255, 255, 255, 0.9); 	 
 }
@@ -115,7 +115,7 @@ body, html {
 .title {
   text-align: left;
   font-weight: bold;
-  font-size: 1.5vw;
+  font-size: 1.6vw;
   z-index: 200;
   margin-bottom: 0;
 }
@@ -130,7 +130,7 @@ body, html {
 
 .content {
   text-align: left;
-  font-size: 1.1vw;
+  font-size: 1.2vw;
   z-index: 200;
   margin-top: 5px;
 }
