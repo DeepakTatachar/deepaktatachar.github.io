@@ -127,7 +127,8 @@ body, html {
   background-size: cover;
   position: relative;
   display: grid;
-  padding-top: 80px;
+  padding-top: 85px;
+  padding-bottom: 30px;
 }
 
 #researchText {
@@ -137,8 +138,9 @@ body, html {
 }
 
 .authors {
-  margin-top: 5px;
-  margin-left: 6px;
+  margin-top: 10px;
+  margin-left: 0px;
+  text-align: left;
 }
 
 .pubLink:link {
@@ -201,12 +203,22 @@ body, html {
   padding-left: 15px;
 }
 
+.paper {
+  text-align: justify;
+  font-size: 3vw;
+  z-index: 200;
+  margin-top: 5px;
+  padding-left: 0px;
+  padding-right: 30px;
+}
+
 .contentJustify {
   text-align: justify;
   font-size: 3vw;
   z-index: 200;
   margin-top: 5px;
-  padding-left: 15px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .contentSmall {
@@ -274,7 +286,7 @@ body, html {
 }
 
 #sportText {
-  margin-top: 120px;
+  margin-top: 100px;
   margin-left: 30px;
   margin-right: 30px;
   font-size: 3vw;
