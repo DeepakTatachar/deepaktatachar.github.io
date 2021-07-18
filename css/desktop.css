@@ -117,7 +117,7 @@ body, html {
 #researchOpacity {
   border: 0;
   filter: alpha;
-  background-color: rgba(15,15,15,0.4);
+  /* background-color: rgba(15,15,15,0.4); */
   width: 100%;
   height: 100%;
   position: absolute;
@@ -130,10 +130,11 @@ body, html {
 
 #research {
   /* The image used */
-  background: url(../images/researchBackground.jpg);
+  /* background: url(../images/researchBackground.jpg); */
+  background-color: rgb(250, 248, 248);
 
   /* Full height */
-  height: 100%; 
+  height: 400%; 
   width: 100%;
 
    /* Set a specific height */
@@ -148,75 +149,77 @@ body, html {
   display: grid;
 }
 
-#projects {
-  margin: 0;
-
-  /* The image used */
-  /*background: url(../images/motorsportBackground.jpg);*/
-
-  /* Full height */
-  height: 100%; 
-  width: 100%;
-
-   /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  display: grid;
-}
-
-#projectUL {
-  list-style-type: none;
-}
-
-.projectLI img {
-  float: left;
-  margin: 10px;
-  border: 5px solid #fff;
-
-  -webkit-transition: box-shadow 0.5s ease;
-  -moz-transition: box-shadow 0.5s ease;
-  -o-transition: box-shadow 0.5s ease;
-  -ms-transition: box-shadow 0.5s ease;
-  transition: box-shadow 0.5s ease;
-}
-
-li img:hover {
-  -webkit-box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
-  box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
-}
 
 #researchText {
   margin-top: 50px;
   margin-left: 30px;
   z-index: 200;
+  color: #444242;
+  font-size: 1.5vw;
+}
+
+#researchCards {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  height: 500px;
+  padding: 30px;
+}
+
+.researchTitle {
+  margin-top: 30px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.3vw;
+  z-index: 200;
+  margin-left: 30px;
+  width: 45%;
+  margin-top: 30px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.3vw;
+  z-index: 200;
+  margin-left: 30px;
+  width: 50%;
+}
+
+.researchAbs {
+  margin: 30px;
+  text-align: justify;
+  font-weight: normal;
+  font-size: 1vw;
+  z-index: 200;
+  margin-top:0px;
 }
 
 .authors {
-    margin-top: 5px;
-    margin-left: 6px;
+  margin: 30px;
+  text-align: justify;
+  font-weight: normal;
+  font-size: 1.2vw;
+  z-index: 200;
+  width: 55%;
+  margin-top:10px;
+  margin-bottom: 10px;
 }
 
 .pubLink:link {
     font-weight: bold;
-    color: white;
+    color: #444244;
+    text-decoration: none;
 }
 
 /* A link that has been visited */
 .pubLink:visited {
     font-weight: bold;
-    color: white;
+    color: #444244;
+    text-decoration: none;
 }
 
 /* A link that is hovered on */
 .pubLink:hover {
-    font-weight: bold;
-    color: blue;
+  font-weight: bold;
+  color: #2586fd;
+  text-decoration: none;
 }
 
 /* A link that is selected */
@@ -307,25 +310,85 @@ li img:hover {
 }
 
 .card {
-  background: #FFFFFF;
+  background: #ffffff8e;
   box-shadow:0 2px 2px 0  #eeeeee40;
   border-radius: 10px;
-  box-shadow: -15px -10px 15px -10px rgba(144, 190, 249, 0.51);
+  -moz-box-shadow: 0 0 20px rgba(144, 189, 249, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(144, 190, 249, 0.51);
+  box-shadow: 0 0 20px rgba(144, 190, 249, 0.51);
   margin-bottom: 25px;
   padding-bottom: 15px;
   width: 95%;
   margin-top: 20px;
 }
 
+.card:hover {
+  -moz-box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+  -webkit-box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+  box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+}
+
 .cardE {
-  background: #FFFFFF;
+  background: #ffffff8e;
   box-shadow:0 2px 2px 0  #eeeeee40;
   border-radius: 10px;
-  box-shadow: -15px -10px 15px -10px rgba(144, 190, 249, 0.51);
+  -moz-box-shadow: 0 0 20px rgba(144, 189, 249, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(144, 190, 249, 0.51);
+  box-shadow: 0 0 20px rgba(144, 190, 249, 0.51);
   margin-bottom: 25px;
   padding-bottom: 15px;
   width: 95%;
   margin-top: 40px;  
+}
+
+.cardE:hover{
+  -moz-box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+  -webkit-box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+  box-shadow: 0 0 20px rgba(45, 136, 255, 0.877);
+}
+
+
+.cardR {
+  background: url(../images/pub_bck.svg);
+  box-shadow:0 2px 2px 0  #eeeeee40;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  width: 95%;
+  margin-top: 10px;  
+  height: 320px;
+}
+
+.cardR:hover{
+  -moz-box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
+  -webkit-box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
+  box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
+}
+
+
+.cardRTitle {
+  background-color:  rgba(253, 247, 236, 0.816);
+  box-shadow:0 2px 2px 0  #eeeeee40;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  box-shadow: 0 0 20px rgba(194, 164, 124, 0.673);
+  margin-bottom: 0px;
+  padding-bottom: 15px;
+  width: 93%;
+  margin-top: 20px;
+  padding-top:10px;
+  padding-left: 10px;
+  margin-left: 30px;
+}
+
+.cardRTitle:hover{
+  -moz-box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
+  -webkit-box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
+  box-shadow: 0 0 20px rgba(255, 139, 45, 0.877);
 }
 
 #eachExp {
@@ -410,7 +473,7 @@ li img:hover {
 }
 
 #profilePic {
-    width: 60%;
+    width: 90%;
     border-radius: 5%;
     z-index: 100;
     margin-top: 0px;
