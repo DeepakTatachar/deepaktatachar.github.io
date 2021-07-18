@@ -118,7 +118,7 @@ body, html {
   border: 0;
   filter: alpha;
   /* background-color: rgba(15,15,15,0.4); */
-  width: 100%;
+  width: 200%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -134,7 +134,7 @@ body, html {
   background-color: rgb(250, 248, 248);
 
   /* Full height */
-  height: 400%; 
+  height: 200%; 
   width: 100%;
 
    /* Set a specific height */
