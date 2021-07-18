@@ -106,7 +106,7 @@ body, html {
 
 #resume {
   display: grid;
-  grid-template-columns: 28% 20px auto;
+  grid-template-columns: 5% 28% 20px auto 5%;
   padding: 30px;
   text-align: center;
   font-size: 1.0vw;
@@ -156,6 +156,7 @@ body, html {
   z-index: 200;
   color: #444242;
   font-size: 1.5vw;
+  margin-right: 30px;
 }
 
 #researchCards {
@@ -163,23 +164,16 @@ body, html {
   grid-template-columns: 33% 33% 33%;
   height: 500px;
   padding: 30px;
+  padding-right: 0px;
 }
 
 .researchTitle {
-  margin-top: 30px;
   text-align: left;
   font-weight: bold;
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   z-index: 200;
   margin-left: 30px;
-  width: 45%;
-  margin-top: 30px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 1.3vw;
-  z-index: 200;
-  margin-left: 30px;
-  width: 50%;
+  margin-right: 30px;
 }
 
 .researchAbs {
@@ -240,6 +234,15 @@ body, html {
   font-size: 1.6vw;
   z-index: 200;
   margin-bottom: 0;
+}
+
+
+.sportsTitle {
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.6vw;
+  z-index: 200;
+  margin-bottom: 25px;
 }
 
 .boldContent {
@@ -491,7 +494,7 @@ body, html {
 }
 
 .line{
-  height:80px;
+  height:8%;
   width:3px;
   background: #1a3fb87e;
   margin-left:8px;
@@ -499,9 +502,27 @@ body, html {
 }
 
 .noline{
-  height:160px;
+  height:15%;
   width:0px;
   background: #1a3fb87e;
   margin-left:8px;
   margin-right:6px;
+}
+
+
+.cardSports {
+  background: #ffe1e10c;
+  box-shadow:0 2px 2px 0  #6d7128cf;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  margin-left: 25px;
+  margin-right: 45px;
+  padding-top: 15px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  width: 95%;
+  margin-top: 10px;
+  
 }

@@ -107,7 +107,7 @@ body, html {
 
 #resume {
   display: grid;
-  grid-template-rows: auto 2px auto;
+  grid-template-rows: 0px auto 2px auto 0px;
   padding: 20px;
   text-align: center;
   font-size: 5vw;
@@ -135,7 +135,7 @@ body, html {
   background-color: rgb(250, 248, 248);
 
   /* Full height */
-  height: 200%; 
+  height: 300%; 
   width: 100%;
 
    /* Set a specific height */
@@ -159,34 +159,24 @@ body, html {
 }
 
 #researchCards {
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  height: 500px;
   padding: 30px;
 }
 
 .researchTitle {
-  margin-top: 30px;
+  margin-left: 30px;
   text-align: left;
   font-weight: bold;
-  font-size: 1.3vw;
+  font-size: 3vw;
   z-index: 200;
-  margin-left: 30px;
-  width: 45%;
-  margin-top: 30px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 1.3vw;
-  z-index: 200;
-  margin-left: 30px;
-  width: 50%;
+  margin-right: 30px;
+  width: 90%;
 }
 
 .researchAbs {
   margin: 30px;
   text-align: justify;
   font-weight: normal;
-  font-size: 1vw;
+  font-size: 3vw;
   z-index: 200;
   margin-top:0px;
 }
@@ -195,7 +185,7 @@ body, html {
   margin: 30px;
   text-align: justify;
   font-weight: normal;
-  font-size: 1.2vw;
+  font-size: 3vw;
   z-index: 200;
   width: 55%;
   margin-top:10px;
@@ -278,7 +268,7 @@ body, html {
 
 .contentJustify {
   text-align: justify;
-  font-size: 1.1vw;
+  font-size: 3vw;
   z-index: 200;
   margin-top: 5px;
   margin-left: 6px;
@@ -358,7 +348,8 @@ body, html {
   padding-bottom: 15px;
   width: 95%;
   margin-top: 10px;  
-  height: 320px;
+  height: 250px;
+  padding-top: 25px;
 }
 
 .cardR:hover{
@@ -399,10 +390,10 @@ body, html {
 #sportsOpacity {
   border: 0;
   filter: alpha;
-  background-color: rgba(15,15,15,0.7);
+  background-color: rgba(15,15,40,0.5);
   width: 100%;
-  height: 780px;
-  position: relative;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   outline: none;
@@ -428,7 +419,7 @@ body, html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
+  position: absolute;
   display: grid;
 }
 
@@ -490,7 +481,7 @@ body, html {
 }
 
 .line{
-  height:160px;
+  height:180px;
   width:3px;
   background: #1a3fb87e;
   margin-left:6px;
@@ -503,4 +494,29 @@ body, html {
   background: #1a3fb87e;
   margin-left:8px;
   margin-right:6px;
+}
+
+.cardSports {
+  background: #ffe1e10c;
+  box-shadow:0 2px 2px 0  #6d7128cf;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  -webkit-box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  box-shadow: 0 0 20px rgba(159, 135, 103, 0.673);
+  margin-left: 25px;
+  margin-right: 45px;
+  padding-top: 15px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  width: 80%;
+  margin-top: 10px;
+  
+}
+
+.sportsTitle {
+  text-align: left;
+  font-weight: bold;
+  font-size: 5vw;
+  z-index: 200;
+  margin-bottom: 25px;
 }
