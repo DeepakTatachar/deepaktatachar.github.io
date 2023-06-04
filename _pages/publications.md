@@ -18,15 +18,21 @@ years: [2016, 2017, 2018, 2019, 2020, 2021]
 
 <div class="jumbotron">
 ### Preprints
+{% raw %}
 {% bibliography --query @unpublished %}
+{% endraw %}
 </div>
 
 <div class="jumbotron">
 ### Refereed journal articles
+{% raw %}
 {% bibliography --query @article %}
+{% endraw %}
 </div>
 
 <div class="jumbotron">
 ### Refereed conference proceedings
+{% raw %}
 {% bibliography --query @inproceedings %}
+{% endraw %}
 </div>

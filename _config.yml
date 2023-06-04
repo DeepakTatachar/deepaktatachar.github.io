@@ -92,5 +92,6 @@ exclude:
   - Gemfile.lock
   - update_boostrap.sh
   - switch_theme.sh
+  - tags
   - Rakefile
-
+  
