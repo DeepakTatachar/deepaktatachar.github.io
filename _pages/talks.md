@@ -24,15 +24,11 @@ permalink: /talks/
 
 <div class="jumbotron">
 ### Invited talks
-{% raw %}
 {% bibliography --query @incollection[keywords ^= invited] %}
-{% endraw %}
 </div>
 
 <div class="jumbotron">
 ### Regular talks
-{% raw %}
 {% bibliography --query @incollection[keywords != invited] %}
-{% endraw %}
 </div>
 
