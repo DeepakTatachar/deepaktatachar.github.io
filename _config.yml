@@ -17,9 +17,9 @@ affiliation: >
     Purdue Univeristy
 
 location: >
-  California Institute of Technology<br/>
-  1200 E California Blvd<br/>
-  Pasadena, CA 91125
+  Purdue Univeristy<br/>
+  465 Northwestern Ave.<br/>
+  West Lafayette, IN 47907-2035
 
 contact: >
     <a href="mailto:dravikum@purdue.edu" target="_blank"><i class="fa fa-envelope fa-1x"></i> Contact Deepak via email</a> <br/>
@@ -29,8 +29,8 @@ nav_pages:
   - name: about
   - name: publications
   # - name: talks
-  - name: research
-  - name: software
+  # - name: research
+  # - name: software
   # - name: team
   # - name: teaching
 
