@@ -123,7 +123,7 @@ Once your site has been modified to fit your needs, you should host it somewhere
 
 1. Make sure there are two branches master and source, code in source and line 3. will update the master. In github pasges use deploy from branch and set the branch to master
 
-2. Update the Rakefile, see this [issue](https://github.com/sbryngelson/academic-website-template/issues/5)
+2. Update the Rakefile and CNAME, see this [issue](https://github.com/sbryngelson/academic-website-template/issues/5)
 
 3. Run `rake publish`
 
