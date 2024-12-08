@@ -7,7 +7,7 @@ permalink: /
 
 ### Welcome!
 
-I am Deepak, a Ph.D. candidate at Purdue Univeristy's [Neuro(nano) Research Laboratory](https://engineering.purdue.edu/NRL) advised by Prof. Kaushik Roy.
+I am Deepak, a Ph.D. candidate at Purdue Univeristy's [Neuro(nano) Research Laboratory](https://engineering.purdue.edu/NRL) advised by Prof. Kaushik Roy. My research focuses on trustworth AI and I am currently on the job market looking to start sometime in spring 2025.
 
 <!-- <div class="container">
 <div class="row">
