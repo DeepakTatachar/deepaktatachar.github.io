@@ -18,11 +18,11 @@ years: [2016, 2017, 2018, 2019, 2020, 2021]
 
 
 
-<div class="jumbotron">
+<!-- <div class="jumbotron"> -->
 #### Journal articles
 {% bibliography --query @article %}
 #### Conference proceedings
 {% bibliography --query @inproceedings %}
 #### Preprints
 {% bibliography --query @unpublished %}
-</div>
+<!-- </div> -->
