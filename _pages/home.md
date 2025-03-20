@@ -22,7 +22,7 @@ Feynman R., The theory of positrons. <i>Phys. Rev.</i> (1949)
 
 ### About me
 
-Deepak is currently pursuing his Ph.D. under the guidance of Prof. Kaushik Roy at Purdue University, where his research has gained significant recognition. His work has been spotlighted at leading conferences, earning the 2024 NeurIPS Spotlight Paper Award (Top 2%) and the 2024 ICML Spotlight Paper Award (Top 3.5%). At Purdue, he has been awarded the College of Engineering Scholarship and the ECE Summer Research Grant. His research focuses on deep learning algorithms, with a particular emphasis on deep learning memorization and trustworthy machine learning.
+Deepak is currently pursuing his Ph.D. under the guidance of Prof. Kaushik Roy at Purdue University, where his research has gained significant recognition. His work has been spotlighted at leading conferences, earning the 2024 NeurIPS Spotlight Paper Award (Top 2%), the 2024 ICML Spotlight Paper Award (Top 3.5%) and Estus H. and Vashti L. Magoon Research Excellence Award 2025. At Purdue, he has been awarded the College of Engineering Scholarship and the ECE Summer Research Grant. His research focuses on deep learning algorithms, with a particular emphasis on deep learning memorization and trustworthy machine learning.
 
 He previously worked as an ML Research intern at Microsoft, where he focused on predictive time-series machine learning models. Prior to that, at National Instruments R&D, he developed innovative signal acquisition and processing frameworks, with his work being recognized as one of the Top 3 Best Papers at the National Instruments Tech Conference in 2017.
 
