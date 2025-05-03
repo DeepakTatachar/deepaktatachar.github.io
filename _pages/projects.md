@@ -4,7 +4,7 @@ title: "Projects"
 permalink: /projects/
 ---
 
-Here are a few things I’ve built. Click any card to open the live demo.
+Here are a few things I’ve built. Click on any to open the live demo or know more details.
 
 <ul class="list-unstyled">
   {% for p in site.projects %}

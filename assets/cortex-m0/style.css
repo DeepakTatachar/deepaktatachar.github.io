@@ -271,6 +271,7 @@ body
   display: flex;
   flex-flow: column;
   height: 100%;
+  background: white;
 }
 
 table#register-file {
