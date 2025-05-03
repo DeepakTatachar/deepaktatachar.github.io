@@ -1,0 +1,503 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List Tracker</title>
+    <!-- Include Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+        #controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        #controls button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: auto;
+            background-color: white; /* White background for table */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+        th {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        tr.dragging {
+            opacity: 0.5;
+        }
+        tr.over {
+            border-top: 2px solid #000;
+        }
+        .handle {
+            cursor: move;
+            width: 80px;
+        }
+        .editable {
+            cursor: pointer;
+        }
+        .editable:hover {
+            background-color: #f0f0f0;
+        }
+        input.edit-input {
+            width: 90%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .done {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+        .emoji {
+            margin-left: 10px;
+        }
+        /* Unified Button Styling */
+        .action-button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            background-color: transparent; /* Transparent background */
+            border: none;
+            color: #6c757d; /* Default gray color */
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+        .action-button:hover {
+            color: #FFC107; /* Orange-Yellow on hover */
+        }
+        /* Ensure Buttons are Centered */
+        td.actions-cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Highlight Completed Rows */
+        .completed-row {
+            background-color: #d4edda; /* Light Green */
+            color: #155724; /* Darker Green for text */
+        }
+        .completed-row .done {
+            color: #155724; /* Darker Green for done text */
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+            #controls button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="addItemButton">Add Item</button>
+        <button id="saveListButton">Save List</button>
+        <button id="importListButton">Import List</button>
+        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+    </div>
+
+    <table id="priorityTable">
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Item</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Helper Functions for Cookie Management
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires="+ d.toUTCString();
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(cname) === 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name+'=; Max-Age=-99999999;';
+        }
+
+        // Initialize list items from cookie or default
+        let items = [];
+        const savedItems = getCookie('priorityListItems');
+        if (savedItems) {
+            try {
+                const parsedItems = JSON.parse(savedItems);
+                if (Array.isArray(parsedItems)) {
+                    items = parsedItems;
+                } else {
+                    throw new Error('Invalid data format');
+                }
+            } catch (e) {
+                console.error('Failed to parse saved items:', e);
+                // Initialize with default item if parsing fails
+                items = [
+                    { priority: 0, text: 'Item 1', done: false, doneTimestamp: null }
+                ];
+                saveToCookie();
+            }
+        } else {
+            // Initialize with default item
+            items = [
+                { priority: 0, text: 'Item 1', done: false, doneTimestamp: null }
+            ];
+            saveToCookie();
+        }
+
+        const tbody = document.querySelector('#priorityTable tbody');
+        const addItemButton = document.getElementById('addItemButton');
+        const saveListButton = document.getElementById('saveListButton');
+        const importListButton = document.getElementById('importListButton');
+        const importFileInput = document.getElementById('importFileInput');
+
+        // Function to save the current list to a cookie
+        function saveToCookie() {
+            const dataStr = JSON.stringify(items);
+            setCookie('priorityListItems', dataStr, 7); // Expires in 7 days
+        }
+
+        // Function to render the table
+        function renderTable() {
+            // Sort items: done items first (earliest done first), then not done items by priority
+            items.sort((a, b) => {
+                if (a.done && b.done) {
+                    return a.doneTimestamp - b.doneTimestamp;
+                }
+                if (a.done && !b.done) {
+                    return -1;
+                }
+                if (!a.done && b.done) {
+                    return 1;
+                }
+                return a.priority - b.priority;
+            });
+
+            // Reassign priorities for not done items
+            let currentPriority = 0;
+            items.forEach(item => {
+                if (!item.done) {
+                    item.priority = currentPriority++;
+                }
+            });
+
+            tbody.innerHTML = '';
+            items.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.setAttribute('draggable', !item.done); // Disable dragging for done items
+                tr.dataset.index = index;
+
+                // Apply 'completed-row' class if item is done
+                if (item.done) {
+                    tr.classList.add('completed-row');
+                }
+
+                // Priority Cell
+                const tdPriority = document.createElement('td');
+                tdPriority.textContent = item.done ? '-' : item.priority;
+                tdPriority.classList.add('handle');
+
+                // Item Text Cell
+                const tdText = document.createElement('td');
+                tdText.textContent = item.text;
+                tdText.classList.add('editable');
+                if (item.done) {
+                    tdText.classList.add('done');
+                    tdText.innerHTML += ' <span class="emoji">🎉</span>';
+                }
+                tdText.addEventListener('click', () => editItem(index, tdText));
+
+                // Actions Cell
+                const tdActions = document.createElement('td');
+                tdActions.classList.add('actions-cell'); // For flex styling
+
+                if (item.done) {
+                    // Undo Button
+                    const undoButton = document.createElement('button');
+                    undoButton.innerHTML = '<i class="fas fa-undo"></i>'; // Left circular arrow icon
+                    undoButton.title = 'Undo';
+                    undoButton.classList.add('action-button');
+                    undoButton.setAttribute('aria-label', 'Undo');
+                    undoButton.addEventListener('click', () => toggleDone(index));
+
+                    // Remove Button
+                    const removeButton = document.createElement('button');
+                    removeButton.innerHTML = '<i class="fas fa-trash"></i>'; // Trash can icon
+                    removeButton.title = 'Remove this item';
+                    removeButton.classList.add('action-button');
+                    removeButton.setAttribute('aria-label', 'Remove this item');
+                    removeButton.addEventListener('click', () => deleteItem(index));
+
+                    // Append Undo and Remove buttons
+                    tdActions.appendChild(undoButton);
+                    tdActions.appendChild(removeButton);
+                } else {
+                    // Done Button
+                    const doneButton = document.createElement('button');
+                    doneButton.innerHTML = '<i class="fas fa-check"></i>'; // Check icon
+                    doneButton.title = 'Mark as Done';
+                    doneButton.classList.add('action-button');
+                    doneButton.setAttribute('aria-label', 'Mark as Done');
+                    doneButton.addEventListener('click', () => toggleDone(index));
+
+                    // Append Done button
+                    tdActions.appendChild(doneButton);
+                }
+
+                tr.appendChild(tdPriority);
+                tr.appendChild(tdText);
+                tr.appendChild(tdActions);
+                tbody.appendChild(tr);
+            });
+            attachEventListeners();
+            saveToCookie(); // Save the current state to cookie after rendering
+        }
+
+        // Function to attach drag-and-drop event listeners
+        function attachEventListeners() {
+            const rows = document.querySelectorAll('#priorityTable tbody tr');
+            rows.forEach(row => {
+                if (!row.classList.contains('completed-row')) { // Only attach to not done items
+                    row.addEventListener('dragstart', handleDragStart, false);
+                    row.addEventListener('dragenter', handleDragEnter, false);
+                    row.addEventListener('dragover', handleDragOver, false);
+                    row.addEventListener('dragleave', handleDragLeave, false);
+                    row.addEventListener('drop', handleDrop, false);
+                    row.addEventListener('dragend', handleDragEnd, false);
+                }
+            });
+        }
+
+        let dragSrcEl = null;
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+            this.classList.add('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault(); // Necessary. Allows us to drop.
+            }
+            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation(); // Stops some browsers from redirecting.
+            }
+
+            if (dragSrcEl !== this) {
+                const fromIndex = parseInt(dragSrcEl.dataset.index);
+                const toIndex = parseInt(this.dataset.index);
+
+                // Swap the items in the array
+                const temp = items[fromIndex];
+                items[fromIndex] = items[toIndex];
+                items[toIndex] = temp;
+
+                // Reassign priorities for not done items
+                let currentPriority = 0;
+                items.forEach(item => {
+                    if (!item.done) {
+                        item.priority = currentPriority++;
+                    }
+                });
+
+                renderTable();
+            }
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            const rows = document.querySelectorAll('#priorityTable tbody tr');
+            rows.forEach(row => {
+                row.classList.remove('over');
+            });
+        }
+
+        // Function to add a new item
+        function addItem() {
+            const newItem = { priority: items.filter(item => !item.done).length, text: `Item ${items.length + 1}`, done: false, doneTimestamp: null };
+            items.push(newItem);
+            renderTable();
+        }
+
+        // Event listener for Add Item button
+        addItemButton.addEventListener('click', addItem);
+
+        // Function to edit an item
+        function editItem(index, cell) {
+            if (items[index].done) return; // Prevent editing if done
+
+            const currentText = items[index].text;
+            cell.innerHTML = `<input type="text" class="edit-input" value="${currentText}"/>`;
+            const input = cell.querySelector('input');
+
+            input.focus();
+
+            // Save changes on Enter key or when input loses focus
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    saveEdit();
+                }
+            });
+
+            input.addEventListener('blur', saveEdit);
+
+            function saveEdit() {
+                const newValue = input.value.trim();
+                if (newValue !== '') {
+                    items[index].text = newValue;
+                }
+                renderTable();
+            }
+        }
+
+        // Function to toggle done status of an item
+        function toggleDone(index) {
+            if (!items[index].done) {
+                items[index].done = true;
+                items[index].doneTimestamp = Date.now();
+            } else {
+                items[index].done = false;
+                items[index].doneTimestamp = null;
+            }
+            renderTable();
+        }
+
+        // Function to delete an item (only done items)
+        function deleteItem(index) {
+            const confirmDelete = confirm(`Are you sure you want to remove "${items[index].text}" from the list?`);
+            if (confirmDelete) {
+                items.splice(index, 1);
+                // Reassign priorities for not done items
+                let currentPriority = 0;
+                items.forEach(item => {
+                    if (!item.done) {
+                        item.priority = currentPriority++;
+                    }
+                });
+                renderTable();
+            }
+        }
+
+        // Function to save the current list to a JSON file
+        function saveList() {
+            const dataStr = JSON.stringify(items, null, 4); // Pretty print with 4 spaces
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'priority_list.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Function to import a list from a JSON file
+        function importList(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                alert('No file selected.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedItems = JSON.parse(e.target.result);
+                    if (!Array.isArray(importedItems)) {
+                        throw new Error('Invalid JSON format: Expected an array.');
+                    }
+                    // Validate each item
+                    for (let item of importedItems) {
+                        if (typeof item.priority !== 'number' || typeof item.text !== 'string' || typeof item.done !== 'boolean' || (item.done && typeof item.doneTimestamp !== 'number')) {
+                            throw new Error('Invalid item structure.');
+                        }
+                    }
+                    items = importedItems;
+                    renderTable();
+                    alert('List imported successfully!');
+                } catch (error) {
+                    alert('Failed to import list: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Event listener for Save List button
+        saveListButton.addEventListener('click', saveList);
+
+        // Event listener for Import List button
+        importListButton.addEventListener('click', () => importFileInput.click());
+
+        // Event listener for file input change
+        importFileInput.addEventListener('change', importList);
+
+        // Initial render
+        renderTable();
+    </script>
+</body>
+</html>
