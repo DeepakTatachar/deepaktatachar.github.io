@@ -1,0 +1,228 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cortex-M0 Simulator</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="{{ '/assets/cortex-m0/style.css' | relative_url }}" defer>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="{{ '/assets/cortex-m0/es5-shim.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/cortex-m0/cortexM0HighlightRules.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/cortex-m0/cortex-m0.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/cortex-m0/scale.fix.js' | relative_url }}" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="website">
+<div class="widget">
+  <div class="buttons">
+    <input type="button" value="Assemble" class="assembleButton"/>
+    <input type="button" value="Step" class="stepButton" />
+    <input type="button" value="Run" class="runButton" />
+    <input type="button" value="Reset" class="resetButton" />
+    <input type="button" value="Jump to..." class="gotoButton" />
+    <input type="button" value="Disassemble" class="disassembleButton" />
+    <input type="button" value="Hexdump" class="hexdumpButton" />
+    <input type="button" value="Notes" class="notesButton" />
+  </div>
+</div>
+<div class="grid-top">
+  <div class="ace-editor-grid">
+    <div id="tab-view-bar">
+      <ul class="tabs group">
+        <li><a class="active" id="main-tab" >main.s</a></li>
+        <li><a id="startup-tab">startup.s</a></li>
+      </ul>
+    </div>
+    <pre id="editor">
+.cpu cortex-m0
+.thumb
+.syntax unified
+.fpu softvfp
+
+loadaddr:
+    push {r4,r5,r6,r7,lr}
+    movs r4,#0x44
+    movs r5,#0x55
+    movs r6,#0x66
+    movs r7,#0x77
+    ldr r0,=xvar
+    pop {r4,r5,r6,r7,pc}
+
+.data
+    .align 4
+xvar:
+    .word 0x12345678 
+    .space 4
+
+.text
+
+.global main
+main:
+    nop
+    bl loadaddr
+    ldr r1,[r0,#0]
+    adds r2,r1,#5
+    str r2,[r0,#4]
+    adds r0,r0,#1   // Change r0 to an odd address, so...
+    ldr r2,[r0,#0]  // ...this will HardFault.
+
+      </pre>
+      <pre id="startup-editor">
+.cpu cortex-m0
+.thumb
+.syntax unified
+.fpu softvfp
+
+.org 0x08000000 
+startup:
+    bl main
+loop:
+    b loop
+</pre>
+    </div>
+    <div class="output-panel">
+      <div class="reg">
+          <table class="reg-file" id="register-file">
+            <tr>
+              <th>Register</th>
+              <th>Value</th> 
+            </tr>
+            <tr>
+              <td>R0</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R1</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R2</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R3</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R4</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R5</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R6</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R7</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R8</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R9</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R10</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R11</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>R12</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>SP</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>LR</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>PC</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>APSR</td>
+              <td></td>
+            </tr>
+          </table>
+      </div>
+        <div class="mem-panel">
+          <div class="monitor">
+            <div id="dummyDiv">
+              <div class="monitorControls">
+                <label class="browser_label">Memory Browser</label>
+                <label class="start_label" for="start">Start</label>
+                <input type="text" value="0x20000000" class="start" name="start" />
+                <label class="length_label" for="length">Length</label>
+                <input type="text" value="0xFF" class="length" name="length" />
+              </div>
+            </div>
+            <table id="memoryTable" class="scrollTable">
+              <tbody class="scrollContent">
+              </tbody>
+            </table>
+          </div>
+          <div class="console">
+            <div class="messages" id = 'mess'><pre><code>Output Console</code></pre></div>
+            <div class="notes" style="display: none">Welcome! You are looking at the output
+console of this emulator!
+
+This is an javascript based ARMv6 Cortex M0
+emulator. Originally written by Stian Soreng
+and adapted by Nick Morgan for the 6502, 
+the emulator has been customized for the 
+Cortex M0 core.
+
+Along the way we added assembler directive 
+support and overhauled the UI to make this
+as complete as possible.
+
+On the left you will see an editor, where
+you can type in the assembly code.
+
+Tip: use '//' for commenting.
+
+The ‘Assemble’ button assembles the code.
+On top you will see the ‘Run’ button which 
+can be used to run the emulator.
+
+The ‘Step’ button single steps through each 
+line of code highlighting the next 
+instruction to be executed.
+
+Use the ‘Disassemble’ and ‘Hexdump’ to look
+at the code’s disassembly and the hex code 
+respectively.
+
+You can use the ‘Jump’ to jump to specific 
+addresses
+
+Finally, have fun exploring Cortex M0 in 
+Purdue ECE362! We had a lot of fun building 
+this emulator, we hope you enjoy using it too!   
+
+-- ECE 362 Staff   </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
