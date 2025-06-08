@@ -22,10 +22,301 @@ pre{
 </style>
 
 
-<div class="text-justify">{{reference}}</div>
+<div class="text-justify">
+  {% assign display_reference = "" %}
+
+  {% comment %}
+    Define rules for author bolding. The 'strip' filter is added to 'original' 
+    to handle potential leading/trailing whitespace in author names from the BibTeX data,
+    making the replacement more robust.
+  {% endcomment %}
+  {% assign author_bolding_rules = 'Ravikumar, Deepak:<i>Ravikumar, Deepak</i>|Deepak, R:<i>Deepak, R</i>' %}
+  {% assign bold_authors_filter = author_bolding_rules | split: '|' %}
+
+  {% comment %}
+    Apply author bolding to the raw author string once at the beginning.
+  {% endcomment %}
+  {% assign authors_string = entry.author | replace: ' and ', ', ' | strip %}
+  {% for rule in bold_authors_filter %}
+    {% assign original = rule | split: ':' | first | strip %}
+    {% assign bolded = rule | split: ':' | last %}
+    {% assign authors_string = authors_string | replace: original, bolded %}
+  {% endfor %}
+
+
+  {% comment %}
+    Shortening logic for conference/journal names, embedded directly in each block to avoid Liquid errors.
+  {% endcomment %}
+  
+  {% comment %} Inproceedings (Conference Papers) {% endcomment %}
+  {% if entry.type == "inproceedings" %}
+    {% assign conference_name_raw = entry.booktitle | strip %}
+    {% assign conference_name_short = conference_name_raw %}
+
+    {% comment %} Try to extract short form from parentheses, e.g., "Full Name (FN)" -> "FN" {% endcomment %}
+    {% assign parts = conference_name_raw | split: '(' %}
+    {% if parts.size > 1 %}
+      {% assign last_part_with_paren = parts | last %}
+      {% assign short_form_candidate = last_part_with_paren | split: ')' | first | strip %}
+      {% if short_form_candidate != "" and short_form_candidate != conference_name_raw %}
+        {% assign conference_name_short = short_form_candidate %}
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Fallback to specific mappings if no parentheses short form {% endcomment %}
+    {% if conference_name_short == conference_name_raw %}
+      {% case conference_name_raw %}
+        {% when "The 39th Annual AAAI Conference on Artificial Intelligence" %}
+          {% assign conference_name_short = "AAAI" %}
+        {% when "Forty-first International Conference on Machine Learning" %}
+          {% assign conference_name_short = "ICML" %}
+        {% when "Forty-second International Conference on Machine Learning" %}
+          {% assign conference_name_short = "ICML" %}
+        {% when "The Thirty-eighth Annual Conference on Neural Information Processing Systems" %}
+          {% assign conference_name_short = "NeurIPS" %}
+        {% when "IEEE / CVF Computer Vision and Pattern Recognition Conference Workshop" %}
+          {% assign conference_name_short = "CVPRW" %}
+        {% when "International Symposium on On-Line Testing and Robust System Design (IOLTS) 2025" %}
+          {% assign conference_name_short = "IOLTS 2025" %}
+        {% when "2016 International Conference on Emerging Trends in Engineering, Technology and Science (ICETETS)" %}
+          {% assign conference_name_short = "ICETETS" %}
+        {% when "2016 Second International Conference on Research in Computational Intelligence and Communication Networks (ICRCICN)" %}
+          {% assign conference_name_short = "ICRCICN" %}
+        {% when "Proceedings of the VLDB Endowment" %}
+          {% assign conference_name_short = "VLDB" %}
+        {% else %}
+          {% assign conference_name_short = conference_name_raw %}
+      {% endcase %}
+    {% endif %}
+    
+    {% assign bolded_conference = '<b>' | append: conference_name_short | append: ' ' | append: entry.year | append: '</b>' %}
+
+    {% comment %} Construct: Authors. Title. Bolded_Short_Conference_Name_Year. {% endcomment %}
+    {% assign display_reference = authors_string | append: '. ' | append: entry.title | append: '. ' | append: bolded_conference %}
+    
+    {% comment %} Append optional URL and Note {% endcomment %}
+    {% if entry.url %}
+      {% assign display_reference = display_reference | append: '. <a href="' | append: entry.url | append: '" title="' | append: entry.url | append: '"> (paper link)</a>' %}
+    {% endif %}
+    {% if entry.note %}
+      {% assign display_reference = display_reference | append: ' <b style="color:red;">(' | append: entry.note | append: ')</b>' %}
+    {% endif %}
+    
+  {% comment %} Unpublished (Preprints) {% endcomment %}
+  {% elsif entry.type == "unpublished" %}
+    {% assign title_string = entry.title | strip %}
+    
+    {% assign display_reference = authors_string | append: '. ' | append: title_string %}
+    
+    {% if entry.journal %}
+      {% assign journal_name_raw = entry.journal | strip %}
+      {% assign journal_name_short = journal_name_raw %}
+
+      {% comment %} Try to extract short form from parentheses {% endcomment %}
+      {% assign parts = journal_name_raw | split: '(' %}
+      {% if parts.size > 1 %}
+        {% assign last_part_with_paren = parts | last %}
+        {% assign short_form_candidate = last_part_with_paren | split: ')' | first | strip %}
+        {% if short_form_candidate != "" and short_form_candidate != journal_name_raw %}
+          {% assign journal_name_short = short_form_candidate %}
+        {% endif %}
+      {% endif %}
+
+      {% comment %} Fallback to specific mappings {% endcomment %}
+      {% if journal_name_short == journal_name_raw %}
+        {% case journal_name_raw %}
+          {% when "Transactions on Machine Learning Research" %}
+            {% assign journal_name_short = "TMLR" %}
+          {% when "IEEE Access" %}
+            {% assign journal_name_short = "IEEE Access" %}
+          {% when "IEEE Transactions on Artificial Intelligence" %}
+            {% assign journal_name_short = "IEEE TAI" %}
+          {% when "arXiv preprint arXiv:2407.02713" %}
+            {% assign journal_name_short = "arXiv" %}
+          {% when "arXiv preprint arXiv:2205.03493" %}
+            {% assign journal_name_short = "arXiv" %}
+          {% else %}
+            {% assign journal_name_short = journal_name_raw %}
+        {% endcase %}
+      {% endif %}
+
+      {% assign bolded_journal = '<b>' | append: journal_name_short | append: ' ' | append: entry.year | append: '</b>' %}
+      {% assign display_reference = display_reference | append: '. ' | append: bolded_journal %}
+    {% else %}
+      {% comment %} If no journal, still append the year {% endcomment %}
+      {% assign display_reference = display_reference | append: '. <b>' | append: entry.year | append: '</b>' %}
+    {% endif %}
+    
+    {% comment %} Append optional URL and Note {% endcomment %}
+    {% if entry.url %}
+      {% assign display_reference = display_reference | append: '. <a href="' | append: entry.url | append: '" title="' | append: entry.url | append: '"> (paper link)</a>' %}
+    {% endif %}
+    {% if entry.note %}
+      {% assign display_reference = display_reference | append: ' <b style="color:red;">(' | append: entry.note | append: ')</b>' %}
+    {% endif %}
+
+  {% comment %} Article (Journal Papers) {% endcomment %}
+  {% elsif entry.type == "article" %}
+    {% assign title_string = entry.title | strip %}
+    {% assign journal_name_raw = entry.journal | strip %}
+    {% assign journal_name_short = journal_name_raw %}
+    
+    {% comment %} Try to extract short form from parentheses {% endcomment %}
+    {% assign parts = journal_name_raw | split: '(' %}
+    {% if parts.size > 1 %}
+      {% assign last_part_with_paren = parts | last %}
+      {% assign short_form_candidate = last_part_with_paren | split: ')' | first | strip %}
+      {% if short_form_candidate != "" and short_form_candidate != journal_name_raw %}
+        {% assign journal_name_short = short_form_candidate %}
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Fallback to specific mappings {% endcomment %}
+    {% if journal_name_short == journal_name_raw %}
+      {% case journal_name_raw %}
+        {% when "Transactions on Machine Learning Research" %}
+          {% assign journal_name_short = "TMLR" %}
+        {% when "IEEE Access" %}
+          {% assign journal_name_short = "IEEE Access" %}
+        {% when "IEEE Transactions on Artificial Intelligence" %}
+          {% assign journal_name_short = "IEEE TAI" %}
+        {% else %}
+          {% assign journal_name_short = journal_name_raw %}
+      {% endcase %}
+    {% endif %}
+
+    {% assign bolded_journal = '<b>' | append: journal_name_short | append: ' ' | append: entry.year | append: '</b>' %}
+
+    {% comment %} Construct: Authors. Title. Italicized_Journal_Year, [Volume](Number), Pages. {% endcomment %}
+    {% assign display_reference = authors_string | append: '. ' | append: title_string | append: '. ' | append: bolded_journal %}
+
+    {% if entry.volume %}
+      {% assign display_reference = display_reference | append: ', <i>' | append: entry.volume | append: '</i>' %}
+      {% if entry.number %}
+        {% assign display_reference = display_reference | append: '(' | append: entry.number | append: ')' %}
+      {% endif %}
+    {% endif %}
+    
+    {% if entry.pages %}
+      {% assign display_reference = display_reference | append: ', ' | append: entry.pages %}
+    {% endif %}
+    
+    {% comment %} Append optional URL and Note {% endcomment %}
+    {% if entry.url %}
+      {% assign display_reference = display_reference | append: '. <a href="' | append: entry.url | append: '" title="' | append: entry.url | append: '"> (paper link)</a>' %}
+    {% endif %}
+    {% if entry.note %}
+      {% assign display_reference = display_reference | append: ' <b style="color:red;">(' | append: entry.note | append: ')</b>' %}
+    {% endif %}
+
+  {% comment %} Fallback for other entry types (e.g., Thesis, Report) if formatted_reference is working.
+    This attempts to apply bolding and URL changes to the default formatted_reference.
+  {% endcomment %}
+  {% else %}
+    {% assign display_reference = formatted_reference %}
+
+    {% comment %} Re-apply author bolding to formatted_reference in case it was generated by Jekyll-Scholar {% endcomment %}
+    {% for rule in bold_authors_filter %}
+      {% assign original = rule | split: ':' | first | strip %}
+      {% assign bolded = rule | split: ':' | last %}
+      {% assign display_reference = display_reference | replace: original, bolded %}
+    {% endfor %}
+
+    {% comment %} Handle booktitle/journal for fallback types {% endcomment %}
+    {% assign publication_name_raw = "" %}
+    {% assign publication_name_short = "" %}
+    {% assign publication_field = "" %}
+
+    {% if entry.booktitle %}
+      {% assign publication_field = "booktitle" %}
+      {% assign publication_name_raw = entry.booktitle | strip %}
+      {% assign publication_name_short = publication_name_raw %}
+    {% elsif entry.journal %}
+      {% assign publication_field = "journal" %}
+      {% assign publication_name_raw = entry.journal | strip %}
+      {% assign publication_name_short = publication_name_raw %}
+    {% endif %}
+
+    {% if publication_name_raw != "" %}
+      {% comment %} Try to extract short form from parentheses {% endcomment %}
+      {% assign parts = publication_name_raw | split: '(' %}
+      {% if parts.size > 1 %}
+        {% assign last_part_with_paren = parts | last %}
+        {% assign short_form_candidate = last_part_with_paren | split: ')' | first | strip %}
+        {% if short_form_candidate != "" and short_form_candidate != publication_name_raw %}
+          {% assign publication_name_short = short_form_candidate %}
+        {% endif %}
+      {% endif %}
+
+      {% comment %} Fallback to specific mappings {% endcomment %}
+      {% if publication_name_short == publication_name_raw %}
+        {% case publication_name_raw %}
+          {% when "The 39th Annual AAAI Conference on Artificial Intelligence" %}
+            {% assign publication_name_short = "AAAI" %}
+          {% when "Forty-first International Conference on Machine Learning" %}
+            {% assign publication_name_short = "ICML" %}
+          {% when "Forty-second International Conference on Machine Learning" %}
+            {% assign publication_name_short = "ICML" %}
+          {% when "The Thirty-eighth Annual Conference on Neural Information Processing Systems" %}
+            {% assign publication_name_short = "NeurIPS" %}
+          {% when "IEEE / CVF Computer Vision and Pattern Recognition Conference Workshop" %}
+            {% assign publication_name_short = "CVPRW" %}
+          {% when "International Symposium on On-Line Testing and Robust System Design (IOLTS) 2025" %}
+            {% assign publication_name_short = "IOLTS 2025" %}
+          {% when "2016 International Conference on Emerging Trends in Engineering, Technology and Science (ICETETS)" %}
+            {% assign publication_name_short = "ICETETS" %}
+          {% when "2016 Second International Conference on Research in Computational Intelligence and Communication Networks (ICRCICN)" %}
+            {% assign publication_name_short = "ICRCICN" %}
+          {% when "Proceedings of the VLDB Endowment" %}
+            {% assign publication_name_short = "VLDB" %}
+          {% when "Transactions on Machine Learning Research" %}
+            {% assign publication_name_short = "TMLR" %}
+          {% when "IEEE Access" %}
+            {% assign publication_name_short = "IEEE Access" %}
+          {% when "IEEE Transactions on Artificial Intelligence" %}
+            {% assign publication_name_short = "IEEE TAI" %}
+          {% when "arXiv preprint arXiv:2407.02713" %}
+            {% assign publication_name_short = "arXiv" %}
+          {% when "arXiv preprint arXiv:2205.03493" %}
+            {% assign publication_name_short = "arXiv" %}
+          {% else %}
+            {% assign publication_name_short = publication_name_raw %}
+        {% endcase %}
+      {% endif %}
+      
+      {% assign bolded_publication_name = '<b>' | append: publication_name_short | append: ' ' | append: entry.year | append: '</b>' %}
+      {% if display_reference contains publication_name_raw %} {# Use raw name for replacement lookup #}
+        {% assign display_reference = display_reference | replace: publication_name_raw, bolded_publication_name %}
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Replace full URL with (paper link) if present {% endcomment %}
+    {% if entry.url %}
+      {% assign display_reference = display_reference | replace: entry.url, '<a href="' | append: entry.url | append: '" title="' | append: entry.url | append: '"> (paper link)</a>' %}
+    {% endif %}
+
+    {% comment %} Remove year from its original position if it's already included in the bolded name {% endcomment %}
+    {% if entry.year %}
+      {% assign year_string_with_paren = '(' | append: entry.year | append: ').' %}
+      {% assign display_reference = display_reference | replace: year_string_with_paren, '' %}
+      {% assign display_reference = display_reference | replace: entry.year, '' %}
+    {% endif %}
+
+    {% comment %} Append optional Note to fallback if it's not already in the generated reference {% endcomment %}
+    {% if entry.note %}
+      {% assign display_reference = display_reference | append: ' <b style="color:red;">(' | append: entry.note | append: ')</b>' %}
+    {% endif %}
+
+  {% endif %}
+
+  {{ display_reference | strip | append: '.' }} {% comment %} Ensure a single period at the very end {% endcomment %}
+</div>
+<!-- <div class="text-justify">{{reference}}</div> -->
+<!-- <div class="text-justify">{{ formatted_reference }}</div> -->
+
 
 <!-- You can use the below to make your name bold -->
-<!-- {{reference | replace_first: 'Bryngelson, S. H.', '<b>Bryngelson, S. H.</b>' | replace_first: 'Bryngelson, S.', '<b>Bryngelson, S.</b>' }}</div> -->
+<!-- {{reference | replace_first: 'Ravikumar, D.', '<b>Ravikumar, D.</b>' | replace_first: 'Deepak, R.', '<b>Deepak, R.</b>' }} -->
 
 {% assign bibtest = false %}
 {% if entry.file %}
@@ -70,6 +361,11 @@ pre{
 <div id="b{{entry.key}}" style="display: none; background-color:black; border-radius:5px; padding:10px; margin-bottom:20px;">
 <pre>{{entry.abstract}}</pre>
 </div>
+
+
+
+<!-- <div class="text-justify">{{ formatted_reference }}</div> -->
+
 
 <script>
 function toggleBibtex{{entry.key}}(parameter) {
