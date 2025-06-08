@@ -1,6 +1,53 @@
-# - date: 1 January, 1941
-#   headline: "Example news here"
+- date: 31 May, 2025
+  headline: "Authored invited paper on Building Resilient AI: Strengthening Data, Security, and Robustness in Neural Networks at IOLTS 25."
 
-# - date: 1 January, 1940
-#   headline: "Example news here"
+- date: 1 May, 2025
+  headline: "Towards Memorization Estimation: Fast, Formal and Free, accepted at ICML '25"
 
+- date: 26 April, 2025
+  headline: "Awarded Estus H. and Vashti L. Magoon Research Excellence Award."
+
+- date: 4 April, 2025
+  headline: "Additive Angular Margin Loss based OoD paper accepted at CVPRW 25"
+
+- date: 9 December, 2024
+  headline: "SAP, unlearning paper accepted at AAAI '25"
+
+- date: 24 Sept, 2024
+  headline: "Curvature Clues, paper awaraded Spotlight at NeurIPS '24"
+
+- date: 1 May, 2024
+  headline: "Two papers accepted at ICML '24, 1 spotlight, 1 poster"
+
+- date: 27 Feb, 2023
+  headline: "Intra-class Mixup paper accepted to IEEE Access"
+
+- date: 14 May, 2022
+  headline: "TREND paper accepted to IEEE Transactions on Artificial Intelligence"
+
+- date: 13 November, 2019
+  headline: "Received scholarship sponsored by the College of Engineering and the Graduate School for the 2019-2020 academic year."
+
+- date: 23 April, 2019
+  headline: "Awarded 2019 ECE Magoon Award for TA excellence"
+
+- date: 10 August, 2016
+  headline: "Graduated with a Bronze Medal for academic excellence from M.S. Ramaiah Institute of Technology"
+
+- date: 30 Jul, 2015
+  headline: "Reached the quarter finals of Texas Instruments Innovation Challenge India Design Contest 2015"
+
+- date: Sept, 2014
+  headline: "Winner of Texas Instruments India Analog Maker Competition held at M. S. Ramaiah Institute of Technology. Team of three Deepak R, Abhishek V N and Sriharikrishna M"
+
+- date: 9 June, 2012
+  headline: "Secured AIEEE National Rank 5170 / 1.13M (Top 0.45%)"
+
+- date: 6 June, 2012
+  headline: "Secured Rank 553 / 120,945 in Karnataka CET (Top 0.45%)"
+
+- date: 18 May, 2012
+  headline: "Secured IIT-JEE Rank 12306 / 0.56M (Top 2%)"
+
+- date: July, 2008
+  headline: "Won second place at Summer School in Electronics, IETE, Bangalore. Deepak was the yongest (by 3 years) student at the electronics circuit showcase competition."

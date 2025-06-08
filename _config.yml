@@ -29,6 +29,7 @@ nav_pages:
   - name: about
   - name: publications
   - name: projects
+  - name: news
   # - name: talks
   # - name: research
   # - name: software

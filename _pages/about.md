@@ -8,7 +8,7 @@ permalink: /about/
 ## About 
 
 {% for member in site.data.pi %}
-<div class="jumbotron">
+<div>
 <div class="row">
 <div class="col-sm-4">
   <img src="{{ site.url }}{{ site.baseurl }}/images/{{ member.photo }}" width="100%" style="max-width:250px"/>
@@ -75,7 +75,7 @@ permalink: /about/
 {% endif %}
 
 {% if site.data.awards %}
-<div class="jumbotron">
+<div>
 ### Awards
 <ul>
 {% for award in site.data.awards %}
