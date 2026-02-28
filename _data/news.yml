@@ -1,3 +1,18 @@
+- date: 26 Jan, 2026
+  headline: "Our paper \"Memorization Through the Lens of Sample Gradients\" has been accepted to ICLR 2026."
+
+- date: 23 Jan, 2026
+  headline: "Our paper, \"From Clutter to Clarity: Visual Recognition through Foveated Object-Centric Learning (FocL)\" has been accepted to TMLR."
+
+- date: 13 Jan, 2026
+  headline: "Our paper \"Late Breaking Results: Input Loss Curvature as a Predictor of Sample Vulnerability to Hardware-Noise\" has been accepted to DATE 2026." 
+
+- date: 22 Oct, 2025
+  headline: "The paper \"Coresets from trajectories: Selecting data via correlation of loss differences\" has been accepted to TMLR!"
+
+- date: 29 Sep, 2025
+  headline: "Our paper, \"From Clutter to Clarity: Visual Recognition through Foveated Object-Centric Learning (FocL)\" has been accepted to NeurIPS 2025 - Reliable ML Workshop."
+
 - date: 20 June, 2025
   headline: "Defended my PhD research, <i>Towards Trustworthy AI: Understanding Memorization, Privacy, and Security in Deep Learning</i>. <a href='https://www.linkedin.com/posts/nrl-purdue_purdueuniversity-engineeringexcellence-purdueece-activity-7341921074625855490-QNf6?utm_source=share&utm_medium=member_desktop&rcm=ACoAACRmo2IBLcphNzfLPXUrvOhPTDK_tbWhOdc'>See pictures on LinkedIn</a>. <a href='https://www.youtube.com/watch?v=HJYToPkmKFg' target='_blank'> You can see my defense on YouTube.</a>"
 
