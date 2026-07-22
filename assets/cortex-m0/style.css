@@ -1,0 +1,513 @@
+body
+{
+  background-color: #edeeef;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+.widget {
+  flex: 0 1 auto;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto; 
+  margin: 0px;
+}
+
+.label_debug {
+  margin: 0px 0;
+}
+
+.widget pre {
+  margin: 0;
+  padding: 0;
+  background: inherit;
+  border: none;
+}
+
+#editor, #startup-editor {
+  margin: 0 0 0 0;
+  padding: 0px;
+  border: 0px solid #cdd2d8;
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: auto;
+  float: left;
+  background: #fffff9;
+  margin-right: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.debugger {
+  border: 0px black solid;
+  margin-top: 10px;
+  padding: 0px;
+  padding-top: 0px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  float: right;
+  max-height: 350px;
+}
+
+.minidebugger {
+  padding: 0;
+  text-align: center;
+  font-size: 9pt;
+  float: center;
+  max-height: 350px;
+}
+
+#dummyDiv {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 10000;
+}
+
+.monitorControls {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  display: table-row; 
+  overflow: auto;
+}
+
+.monitor {
+  margin-top: 15px;
+  padding: 0;
+  height: 200px;
+  border: 1px solid #999;
+  background-color: #ddd;
+  width: auto;
+  height: auto;
+  overflow: auto;
+  display: none;
+  border: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.messages, .notes {
+  margin-top: 15px;
+  margin-right: 0px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  border: 0px solid #999;
+  background-color: #fff9f2;
+  width: auto;
+  height: 100%;
+  overflow-y: auto;
+  max-height: 500px;
+  text-align: left;
+  font-size: 12px;
+  color: #626263;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 12pt;
+  font-family: 'Arial', sans-serif;
+}
+
+.messages pre, .notes pre {
+  background-color: transparent;
+  border: none;
+}
+
+.console {
+  margin-left: 0;
+  margin-top: 0px;
+  padding: 0px;
+  height: calc(100% - 40px);
+  font-family: 'Arial', sans-serif;
+}
+
+.myMarker {
+  position:absolute;
+  background:rgba(100,200,100,0.5);
+  z-index:20
+}
+
+.ace_highlight-marker {
+   position: absolute; /* without this positions will be wrong */
+   background: #ffd989; /* color */ 
+   z-index: 1000; /* in front of all other markers */ 
+}
+
+.grid-top {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: 40% 60%;
+  padding: 0px;
+  margin: 0;
+  margin-right: 150px;
+}
+
+.output-panel {  
+  display: grid;
+  grid-template-columns: 200px auto;
+  padding: 0px;
+}
+
+.mem-panel {
+  display: grid;
+  grid-template-rows: 50vh 44.5vh;
+  padding: 0px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.ace-editor-grid {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.ace-editor-grid-inactive {
+  margin-right: 15px;
+  margin-left: 15px;
+  display: none;  
+}
+
+.editor-panel {
+  display: grid;
+  grid-template-rows: auto;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.memory_monitor {
+  display: grid;
+  border: 1px solid black;
+  grid-template-columns: 190px auto;
+  margin: 20px 40px 20px 0px;
+}
+
+.label_debug {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+.debug {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -2px;
+  *overflow: hidden;
+}
+.monitoring {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -2px;
+  *overflow: hidden;
+}
+
+.assembleButton, .runButton, .resetButton, .hexdumpButton,.disassembleButton,.notesButton,.stepButton,.gotoButton {
+  border: none;
+  background-color:#555555; 
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 12pt;
+  font-family: 'Arial', sans-serif;
+}
+
+.assembleButton:hover:enabled, .runButton:hover:enabled, .resetButton:hover:enabled, .hexdumpButton:hover:enabled,.disassembleButton:hover:enabled,.notesButton:hover:enabled,.stepButton:hover:enabled,.gotoButton:hover:enabled{
+  border: none;
+  background-color: #3d3d3d;
+  color: white;
+  display: inline-block;
+  margin: 0px 0px;
+  cursor: hand;
+  z-index: 100;
+    font-family: 'Arial', sans-serif;
+}
+
+.assembleButton:hover:disabled, .runButton:hover:disabled, .resetButton:hover:disabled, .hexdumpButton:hover:disabled,.disassembleButton:hover:disabled,.notesButton:hover:disabled,.stepButton:hover:disabled,.gotoButton:hover:disabled{
+  border: none;
+  background-color: #8c8c8c;
+  color: #545454;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px;
+  cursor: not-allowed;
+  z-index: 100;
+  font-family: 'Arial', sans-serif;
+}
+
+.assembleButton:disabled, .runButton:disabled, .resetButton:disabled, .hexdumpButton:disabled,.disassembleButton:disabled,.notesButton:disabled,.stepButton:disabled,.gotoButton:disabled{
+  border: none;
+  background-color: #8c8c8c;
+  color: #545454;
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px;
+  cursor: pointer;
+  z-index: 100;
+  font-family: 'Arial', sans-serif;
+}
+
+.assembleButton:active:enabled, .runButton:active:enabled, .resetButton:active:enabled, .hexdumpButton:active:enabled,.disassembleButton:active:enabled,.notesButton:active:enabled,.stepButton:active:enabled,.gotoButton:active:enabled {
+    position: relative;
+    background-color: #282826;
+    font-family: 'Arial', sans-serif;
+}
+
+.website {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  background: white;
+}
+
+table#register-file {
+  margin: 15px 0 15px 0;
+  width:100%;
+  height: calc(100% - 30px);
+  min-height: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+table {
+  width: 100%;
+  z-index: -50;
+}
+table, th, td {
+  border: 0px solid black;
+  border-collapse: collapse;
+  font-size: 10pt;
+  font-family: "Courier New", "Lucida Console", Monaco, monospace;
+}
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+table#register-file tr {
+  background-color: white;
+  border-bottom: 0.5pt solid #9b9b9b;
+  border-left: 10pt solid white;
+  border-right: 10pt solid white;
+  color: #606060;
+}
+
+table#register-file tr:last-child {
+  background-color: white;
+  border-bottom: 0pt solid #9b9b9b;
+  border-left: 10pt solid white;
+  border-right: 10pt solid white;
+  color: #606060;
+}
+
+table#register-file tr:nth-child(18) {
+  background-color: white;
+  border-bottom: 0pt solid #9b9b9b;
+  border-left: 10pt solid white;
+  border-right: 10pt solid white;
+  font-size: 8pt;
+  color: #606060;
+}
+
+table#register-file th {
+  background-color: white;
+  color: #606060;
+}
+
+.ace_gutter-cell.ace_breakpoint{ 
+    border-radius: 20px 0px 0px 20px; 
+    box-shadow: 0px 0px 1px 1px red inset; 
+}
+
+/* define the table content to be scrollable                                              */
+/* set TBODY element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* induced side effect is that child TDs no longer accept width: auto                     */
+.scrollContent {
+  display: table-row;
+  width: auto;
+  overflow: auto;
+  margin-right: 0px;
+  margin-top: 0px;
+  
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+/* http://www.alistapart.com/articles/zebratables/                             */
+.scrollContent td, .scrollContent tr.normalRow td {
+  background: #FFF;
+  border-bottom: none;
+  border-left: none;
+  border-right: 1px solid #CCC;
+  border-top: 1px solid #DDD;
+  padding: 2px 3px 3px 4px;
+}
+
+.scrollContent tr.alternateRow td {
+  background: #EEE;
+  border-bottom: none;
+  border-left: none;
+  border-right: 1px solid #CCC;
+  border-top: 1px solid #DDD;
+  padding: 2px 3px 3px 4px
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
+/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+.fixedHeader th {
+  border-right: 1px solid #CCC;
+  border-top: 1px solid #DDD;
+  width: 61px;
+  font-family: font-family: 'Arial', sans-serif;;
+}
+
+.fixedHeader th + th {
+  border-right: 1px solid #CCC;
+  border-top: 1px solid #DDD;
+  width: 7px;
+  padding: 2px 3px 3px 4px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
+/* All other non-IE browsers.                                            */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+.scrollContent td {
+  color: #606060;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.scrollContent td:last-child {
+    width: 100%;
+}
+
+.browser_label {
+  font-family: 'Arial', sans-serif;
+  color: #606060;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.start_label, .length_label {
+  font-family: 'Arial', sans-serif;
+  color: #606060;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.start {
+  font-family: 'Arial', sans-serif;
+  color: #606060;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 6.1vw;
+}
+
+.length {
+  font-family: 'Arial', sans-serif;
+  color: #606060;
+  margin: 5px;
+  width: 50px;
+}
+
+.mem-browser {
+  vertical-align: center;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+ul.tabs {
+  height: 40px;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+ul.tabs li {  
+  float: left;
+  width: 10vw;
+  min-width: 80px;
+}
+
+ul.tabs li a {
+  position: relative;
+  display: block;
+  height: 40px;
+  padding: 10px 0 0 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12pt;
+  text-align: center; 
+  text-decoration: none;
+  background-color: #8c8c8c;
+  color: #e5e3e3;
+  -webkit-box-shadow: 0px 25px 25px 2px rgba(0,0,0,0.4);
+     -moz-box-shadow: 0px 25px 25px 2px rgba(0,0,0,0.4);
+          box-shadow: 0px 25px 25px 2px rgba(0,0,0,0.4);
+            border: 0px solid #000000;
+  -webkit-transition: padding 0.2s ease, margin 0.2s ease;
+       -moz-transition: padding 0.2s ease, margin 0.2s ease;
+         -o-transition: padding 0.2s ease, margin 0.2s ease;
+        -ms-transition: padding 0.2s ease, margin 0.2s ease;
+            transition: padding 0.2s ease, margin 0.2s ease;
+}
+
+.tabs li:first-child a {
+  z-index: 3;
+  -webkit-border-top-left-radius: 8px;
+-moz-border-radius-topleft: 8px;
+border-top-left-radius: 8px;
+}
+
+.tabs li:nth-child(2) a {
+  z-index: 2;
+}
+
+.tabs li:last-child a {
+  z-index: 1;
+  -webkit-box-shadow: 0px 20px 25px -2px rgba(0,0,0,0.4);
+     -moz-box-shadow: 0px 20px 25px -2px rgba(0,0,0,0.4);
+          box-shadow: 0px 20px 25px -2px rgba(0,0,0,0.4);
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-radius-topright: 8px;
+  border-top-right-radius: 8px;
+}
+
+ul.tabs li a:hover {
+  margin: 5px 0 0 0;
+  padding: 10px 0 5px 0;
+  cursor: pointer;
+}
+
+ul.tabs li a.active {
+  margin: 5px 0 0 0;
+  padding: 10px 0 10px 0;
+  background-color: #bfbfbf;
+  color: #545454;
+  z-index: 4;
+  outline: none;
+}
+
+#tab-view-bar {
+  margin-top: 15px;
+}
